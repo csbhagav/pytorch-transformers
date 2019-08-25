@@ -217,3 +217,10 @@ class GPT2Tokenizer(PreTrainedTokenizer):
                 index += 1
 
         return vocab_file, merge_file
+
+    def add_special_tokens_single_sentence(self, token_ids):
+        """
+        Adds special tokens to the a sequence for sequence classification tasks.
+        A GPT sequence has the following format: [CLS] X [SEP]
+        """
+        return [self._convert_token_to_id(self.bos_token)] + token_ids + [self._convert_token_to_id(self.eos_token)]
